@@ -16,18 +16,7 @@ class _MyUserNameScreenState extends State<MyUserNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
       appBar: AppBar(
-        actions: const [
-          Icon(Icons.search_rounded),
-          SizedBox(
-            width: 10,
-          ),
-          Icon(Icons.chat_bubble_outline),
-          SizedBox(
-            width: 10,
-          ),
-        ],
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 251, 249, 249),
@@ -37,129 +26,124 @@ class _MyUserNameScreenState extends State<MyUserNameScreen> {
         ),
         centerTitle: false,
       ),
-      bottomNavigationBar: Container(
-        height: 70,
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'Back',
-                  style: TextStyle(color: Colors.black),
-                ),
+
+      body: Padding(
+        padding: const EdgeInsets.only(left: 25, right: 25),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Username Details',
+              style: TextStyle(fontSize: 35),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              'Current Username',
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text(
+                '0723568069',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                },
-                child: const Text(
-                  'update',
-                  style: TextStyle(color: Colors.black),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 35.0, bottom: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      'New Username',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  Container(
+                    width: 400,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    child: SizedBox(
+                      width: 250,
+                      height: 25,
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          // focusColor: Color.fromARGB(255, 20, 204, 201),
+                          // fillColor: Color.fromARGB(255, 20, 204, 201),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 30),
+              child: Text(
+                'Your username must be between 8-30 characters long. it must contails :',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 15,
+                bottom: 5,
+              ),
+              child: BulletText(
+                text: 'Numbers (0-9)',
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 15, bottom: 5),
+              child: BulletText(
+                text: 'Lower case letters (a-z)',
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 15, bottom: 5),
+              child: BulletText(
+                text: 'Upper case letters (A-Z)',
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 15, bottom: 5),
+              child: BulletText(
+                text: 'Special characters (@.)',
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text('You cannot use an ID number as a username'),
+          ],
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Row(
-                  children: const [
-                    Text(
-                      'Username Details',
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  children: const [
-                    Text(
-                      'Current Username',
-                    ),
-                  ],
-                ),
-                Row(
-                  children: const [
-                    Text(
-                      '0723568069',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'New Username',
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  children: const [
-                    Expanded(
-                      child: Text(
-                          'Your username must be between 8-30 characters long. it must contails :'),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const BulletText(
-                  text: 'Numbers (0-9)',
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const BulletText(
-                  text: 'Lower case letters (a-z)',
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const BulletText(
-                  text: 'Upper case letters (A-Z)',
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const BulletText(
-                  text: 'Special characters (@.)',
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: const [
-                    Text('You cannot use an ID number as a username'),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+
       //  ),
     );
   }

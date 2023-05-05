@@ -1,10 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:fnb_clone/screens/transfers_screen.dart';
+import 'package:fnb_clone/backend/LookUp.dart';
 import 'package:fnb_clone/widgets/drawer.dart';
-import 'package:fnb_clone/widgets/icon_option.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,260 +12,273 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool showDelete = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: LookUp.isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: const Color.fromARGB(255, 251, 249, 249),
+        iconTheme: IconThemeData(
+            color: LookUp.isDarkMode ? Colors.white : Colors.black),
+        backgroundColor: LookUp.isDarkMode
+            ? Colors.black
+            : const Color.fromARGB(255, 251, 249, 249),
         elevation: 0,
-        title: const Text(
+        title: Text(
           'FNB',
           style: TextStyle(
-            color: Colors.black,
+            color: LookUp.isDarkMode ? Colors.white : Colors.black,
           ),
         ),
         centerTitle: false,
-        // leading: const Icon(
-        //   Icons.menu,
-        //   color: Colors.black,
-        // ),
-        actions: const [
+        actions: [
           Icon(
             Icons.messenger_outline_sharp,
-            color: Colors.black,
+            color: LookUp.isDarkMode ? Colors.white : Colors.black,
           ),
         ],
       ),
-      drawer: CustomDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 200,
-              //color: Colors.blue[200],
-              child: ImageSlideshow(
-                  indicatorColor: Colors.orange,
-                  autoPlayInterval: 3000,
-                  isLoop: true,
-                  children: [
-                    Image.asset(
-                      'assets/download.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/apply.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/newontheapp.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                    Image.asset(
-                      'assets/verify.jpeg',
-                      fit: BoxFit.cover,
-                    ),
-                  ]),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20),
-              //color: Colors.red,
-              //height: 500,
-              child: Column(
+      bottomNavigationBar: Visibility(
+        visible: showDelete,
+        child: SizedBox(
+          //color: Colors.red,
+          height: 50,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 30,
-                    child: TextField(
-                      enabled: false,
-                      //controller: username,
-                      decoration: InputDecoration(
-                        labelText: "Search the FNB App",
-                        prefixIcon: Icon(
-                          Icons.search,
+                    width: 150,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        setState(() {
+                          showDelete = false;
+                        });
+                      },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor:
+                            LookUp.isDarkMode ? Colors.black : Colors.white,
+                        //shadowColor: Colors.fromARGB(255, 165, 127, 124),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(30),
-                          ),
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(255, 1, 1, 1),
-                              width: 3,
-                              style: BorderStyle.solid),
+                        side: BorderSide(
+                            width: 1.0,
+                            color: LookUp.isDarkMode
+                                ? Colors.white
+                                : Colors.black),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(
+                              color: LookUp.isDarkMode
+                                  ? Colors.white
+                                  : Colors.black),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Colors.orange,
-                          title: 'Login',
-                          icon: Icon(
-                            Icons.lock,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Scan to pay',
-                          icon: Icon(
-                            Icons.qr_code_2,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Buy',
-                          icon: Icon(
-                            Icons.shopping_basket,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Payments',
-                          icon: Icon(
-                            Icons.payments_rounded,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
+                  SizedBox(
+                    width: 150,
                     height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'GuardMe',
-                          icon: Icon(
-                            Icons.location_on,
-                            size: 50,
-                            color: Colors.white,
-                          ),
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor:
+                            LookUp.isDarkMode ? Colors.white : Colors.black,
+                        //shadowColor: Colors.fromARGB(255, 165, 127, 124),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Done",
+                          style: TextStyle(
+                              color: LookUp.isDarkMode
+                                  ? Colors.black
+                                  : Colors.white),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TransfersScreen()),
-                          );
-                        },
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Transfers',
-                          icon: Icon(
-                            Icons.transform_outlined,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'My offers',
-                          icon: Icon(
-                            Icons.local_offer,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Colors.orange,
-                          title: 'Product Shop',
-                          icon: Icon(
-                            Icons.shopping_cart,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Iformation',
-                          icon: Icon(
-                            Icons.info_outline,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Messages',
-                          icon: Icon(
-                            Icons.message_rounded,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'TV Hub',
-                          icon: Icon(
-                            Icons.tv_rounded,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          title: 'Secure chat',
-                          icon: Icon(
-                            Icons.mark_chat_read_rounded,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              const Spacer(),
+            ],
+          ),
         ),
+      ),
+      //drawer: CustomDrawer(),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 200,
+            //color: Colors.blue[200],
+            child: ImageSlideshow(
+                indicatorColor: Colors.orange,
+                autoPlayInterval: 3000,
+                isLoop: false,
+                children: [
+                  Image.asset(
+                    'assets/download.jpeg',
+                    fit: BoxFit.cover,
+                  ),
+                  // Image.asset(
+                  //   'assets/apply.jpeg',
+                  //   fit: BoxFit.cover,
+                  // ),
+                  // Image.asset(
+                  //   'assets/newontheapp.jpeg',
+                  //   fit: BoxFit.cover,
+                  // ),
+                  // Image.asset(
+                  //   'assets/verify.jpeg',
+                  //   fit: BoxFit.cover,
+                  // ),
+                ]),
+          ),
+          GestureDetector(
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              height: 40,
+              decoration: BoxDecoration(
+                color: LookUp.isDarkMode ? Colors.black : Colors.grey[200],
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                border: Border.all(
+                  color: Colors.grey,
+                ),
+              ),
+              child: Center(
+                child: TextField(
+                  enabled: false,
+                  decoration: InputDecoration(
+                    labelText: "Search the FNB App",
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: LookUp.isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              itemCount: LookUp().images.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                crossAxisSpacing: 25.0,
+                //mainAxisSpacing: 100.0,
+                childAspectRatio: 1 / 2,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          showDelete = true;
+                        });
+                      },
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: showDelete ? 10 : 5,
+                            ),
+                            child: Container(
+                              height: 70,
+                              decoration: BoxDecoration(
+                                color: LookUp.isDarkMode
+                                    ? Colors.black
+                                    : const Color.fromARGB(255, 251, 249, 249),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                border: Border.all(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              child: Center(
+                                child: LookUp().images[index]['icon'],
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: showDelete,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  var length = LookUp().images.length;
+                                  print('========================== ' +
+                                      length.toString());
+                                  LookUp().images[index].remove(index);
+                                  var lengthe = LookUp().images.length;
+                                  print('========================== ' +
+                                      lengthe.toString());
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 55),
+                                child: Icon(
+                                  CupertinoIcons.clear_circled_solid,
+                                  color: LookUp.isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        LookUp().images[index]['description'],
+                        style: TextStyle(
+                          fontSize: 13,
+                          color:
+                              LookUp.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 30, right: 310, bottom: 50),
+            child: Icon(
+              CupertinoIcons.add_circled,
+              size: 50,
+              color: Colors.orange,
+            ),
+          ),
+        ],
       ),
     );
   }

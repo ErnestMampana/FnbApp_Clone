@@ -1,3 +1,4 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -5,8 +6,10 @@ import 'package:fnb_clone/screens/appPin_screen.dart';
 import 'package:fnb_clone/screens/biometric_screen.dart';
 import 'package:fnb_clone/screens/change_password_screen.dart';
 import 'package:fnb_clone/screens/daily_limits_screen.dart';
+import 'package:fnb_clone/screens/dark_mode_screen.dart';
 import 'package:fnb_clone/screens/home_screen.dart';
 import 'package:fnb_clone/screens/myUsername_screen.dart';
+import 'package:fnb_clone/screens/my_devices_screen.dart';
 import 'package:fnb_clone/screens/partner_wallet_screen.dart';
 import 'package:fnb_clone/screens/watch_screen.dart';
 import 'package:fnb_clone/widgets/drawer.dart';
@@ -18,7 +21,6 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
       appBar: AppBar(
         actions: const [
           Icon(Icons.search_rounded),
@@ -39,38 +41,17 @@ class SettingsScreen extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      bottomNavigationBar: Container(
-        height: 70,
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                },
-                child: const Text(
-                  'Home',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
               child: Container(
                 height: 225,
-                width: 400,
+
                 //margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 decoration: BoxDecoration(
                   color: const Color(0xff7c94b6),
@@ -113,94 +94,67 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child: GridView.count(
+                crossAxisCount: 4,
+                crossAxisSpacing: 25.0,
+                //mainAxisSpacing: 100.0,
+                childAspectRatio: 1 / 2,
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
                 children: [
-                  GestureDetector(
+                  IconBuilder(
+                    icon: Icons.person_pin,
+                    title: 'My Username',
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MyUserNameScreen()),
+                          builder: (context) => const MyUserNameScreen(),
+                        ),
                       );
                     },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.person_pin,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        title: 'My Username'),
                   ),
-                  GestureDetector(
+                  IconBuilder(
+                    icon: Icons.lock_open,
+                    title: 'Change Password',
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ChangePasswordScreen()),
+                          builder: (context) => const ChangePasswordScreen(),
+                        ),
                       );
                     },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.lock_open,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        title: 'Change Password'),
                   ),
-                  GestureDetector(
+                  IconBuilder(
+                    icon: Icons.password,
+                    title: 'Add Pin',
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AppPinScreen()),
+                          builder: (context) => const AppPinScreen(),
+                        ),
                       );
                     },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.password,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        title: 'Add Pin'),
                   ),
-                  GestureDetector(
+                  IconBuilder(
+                    icon: Icons.transform_outlined,
+                    title: 'Daily Limits',
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LimitsScreen()),
+                          builder: (context) => const LimitsScreen(),
+                        ),
                       );
                     },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.transform_outlined,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        title: 'Daily Limits'),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
+                  IconBuilder(
+                    icon: Icons.fingerprint,
+                    title: 'Biometric',
                     onTap: () {
                       Navigator.push(
                         context,
@@ -209,212 +163,81 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.fingerprint,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                        title: 'Biometric'),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const CallCentreScreen()),
-                      // );
-                    },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.phone_android,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        title: 'My device'),
-                  ),
-                  const IconBuilder(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                      icon: Icon(
-                        Icons.message,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      title: 'Messages'),
-                  GestureDetector(
+                   IconBuilder(
+                    icon: Icons.phone_android,
+                    title: 'My device',
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const WatchAppScreen()),
+                          builder: (context) => const MyDevices(),
+                        ),
                       );
                     },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.watch_rounded,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        title: 'Watch App'),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const IconBuilder(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                      icon: Icon(
-                        Icons.account_balance_wallet,
-                        size: 50,
-                        color: Colors.orange,
-                      ),
-                      title: 'Default Account'),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const CallCentreScreen()),
-                      // );
-                    },
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const PartnerWalletScreen()),
-                        );
-                      },
-                      child: const IconBuilder(
-                          color: Color.fromARGB(255, 20, 204, 201),
-                          icon: Icon(
-                            Icons.mobile_screen_share,
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                          title: 'FNB Pay'),
-                    ),
                   ),
                   const IconBuilder(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                      icon: Icon(
-                        Icons.done_sharp,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      title: 'DebitCeck Mandates'),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const ComplemtsScreen()),
-                      // );
-                    },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.settings_applications_rounded,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        title: 'My Vault'),
+                    icon: Icons.message,
+                    title: 'Messages',
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const IconBuilder(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                      icon: Icon(
-                        Icons.person_off_sharp,
-                        size: 50,
-                        color: Colors.orange,
-                      ),
-                      title: 'Block my profile'),
-                  GestureDetector(
+                   IconBuilder(
+                    icon: Icons.watch_rounded,
+                    title: 'Watch App',
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const CallCentreScreen()),
-                      // );
-                    },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.dark_mode,
-                          size: 50,
-                          color: Colors.white,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WatchAppScreen(),
                         ),
-                        title: 'Dark Mode'),
+                      );
+                    },
                   ),
                   const IconBuilder(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                      icon: Icon(
-                        Icons.person_add_rounded,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      title: 'Manage Profiles'),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const ComplemtsScreen()),
-                      // );
-                    },
-                    child: const IconBuilder(
-                        color: Color.fromARGB(255, 20, 204, 201),
-                        icon: Icon(
-                          Icons.phonelink_ring_rounded,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        title: 'Cellphone Banking'),
+                    icon: Icons.account_balance_wallet,
+                    title: 'Default Account',
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                children: const [
+                  const IconBuilder(
+                    icon: Icons.mobile_screen_share,
+                    title: 'FNB Pay',
+                  ),
+                  const IconBuilder(
+                    icon: Icons.done_sharp,
+                    title: 'DebitCeck Mandates',
+                  ),
+                  const IconBuilder(
+                    icon: Icons.settings_applications_rounded,
+                    title: 'My Vault',
+                  ),
                   IconBuilder(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                      icon: Icon(
-                        Icons.visibility_off,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      title: 'Visible accounts'),
+                    icon: BootstrapIcons.moon_stars,
+                    title: 'Dark Mode',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DarkModeScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const IconBuilder(
+                    icon: Icons.person_off_sharp,
+                    title: 'Block my profile',
+                  ),
+                  const IconBuilder(
+                    icon: Icons.person_add_rounded,
+                    title: 'Manage Profiles',
+                  ),
+                  const IconBuilder(
+                    icon: Icons.phonelink_ring_rounded,
+                    title: 'Cellphone Banking',
+                  ),
+                  const IconBuilder(
+                    icon: Icons.visibility_off,
+                    title: 'Visible accounts',
+                  ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
           ],
         ),

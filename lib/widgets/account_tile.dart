@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:fnb_clone/backend/models/account.dart';
 
 class AccountTile extends StatefulWidget {
-  final String title;
-  final String accountType;
-  final double outerBalance;
-  final double balace;
-  final double availBalance;
-  const AccountTile(
-      {super.key,
-      required this.title,
-      required this.accountType,
-      required this.outerBalance,
-      required this.balace,
-      required this.availBalance});
+  final Account accountData;
+  const AccountTile({
+    super.key,
+    required this.accountData,
+  });
 
   @override
   State<AccountTile> createState() => _AccountTileState();
@@ -29,68 +21,48 @@ class _AccountTileState extends State<AccountTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 1,
+              // offset:
+              //     const Offset(0, 0), // changes position of shadow
+            ),
+          ],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        height: 60,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(widget.accountData.accountType!),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    widget.title,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                    ),
+                    'Avail R${widget.accountData.availableBalance}',
+                    textDirection: TextDirection.rtl,
                   ),
                   Text(
-                    'R${widget.outerBalance}',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 20, 204, 201),
-                    ),
+                    'Bal R${widget.accountData.balance}',
+                    textDirection: TextDirection.rtl,
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 1,
-                    // offset:
-                    //     const Offset(0, 0), // changes position of shadow
-                  ),
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.accountType),
-                    Column(
-                      children: [
-                        Text('Avail R ${widget.availBalance}'),
-                        Text('   Bal R${widget.balace}'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        )
-      ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

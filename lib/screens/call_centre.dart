@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fnb_clone/backend/LookUp.dart';
 import 'package:fnb_clone/screens/home_screen.dart';
 import 'package:fnb_clone/widgets/call.dart';
 import 'package:fnb_clone/widgets/drawer.dart';
@@ -11,7 +12,6 @@ class CallCentreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
       appBar: AppBar(
         actions: const [
           Icon(Icons.search_rounded),
@@ -23,18 +23,18 @@ class CallCentreScreen extends StatelessWidget {
             width: 10,
           ),
         ],
-        iconTheme: const IconThemeData(color: Colors.black),
+        iconTheme:  IconThemeData(color:LookUp.isDarkMode ? Colors.white : Colors.black),
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 251, 249, 249),
-        title: const Text(
+        backgroundColor:LookUp.isDarkMode ? Colors.white : const Color.fromARGB(255, 251, 249, 249),
+        title:  Text(
           'FNB Call Centre',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color:LookUp.isDarkMode ? Colors.white : Colors.black),
         ),
         centerTitle: false,
       ),
       bottomNavigationBar: Container(
-        height: 120,
-        color: Colors.white,
+        height: 60,
+        color:LookUp.isDarkMode ? Colors.black : Colors.white,
         child: Column(
           children: [
             SizedBox(
@@ -51,36 +51,13 @@ class CallCentreScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: const Text(
+                child:  Text(
                   'Secure Chat',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: LookUp.isDarkMode ? Colors.black : Colors.white),
                 ),
               ),
             ),
-            const Divider(
-              thickness: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Home',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            
           ],
         ),
       ),

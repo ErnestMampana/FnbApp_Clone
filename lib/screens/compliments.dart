@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:fnb_clone/widgets/drawer.dart';
+import 'package:fnb_clone/widgets/textInput.dart';
 
 class ComplemtsScreen extends StatelessWidget {
   const ComplemtsScreen({super.key});
@@ -33,6 +32,7 @@ class ComplemtsScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               'We love hearing when we get it right. Please go ahead!',
@@ -43,38 +43,30 @@ class ComplemtsScreen extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            Row(
+            const Text(
+              'Complements details',
+              style: TextStyle(
+                color: Color.fromARGB(255, 20, 204, 201),
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
+                Text('Name and Surname'),
                 Text(
-                  'Complements details',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 20, 204, 201),
-                    fontSize: 20,
-                  ),
+                  'Modige Mohlala',
+                  textAlign: TextAlign.left,
                 ),
               ],
             ),
             const SizedBox(
               height: 25,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: const [
-                    Text('Name and Surname'),
-                    Text(
-                      'Modige Mohlala',
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            TextField()
+            TextInputContainer(),
           ],
         ),
       ),

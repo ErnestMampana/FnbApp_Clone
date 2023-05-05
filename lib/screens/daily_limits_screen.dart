@@ -16,14 +16,7 @@ class _LimitsScreenState extends State<LimitsScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        drawer: CustomDrawer(),
         appBar: AppBar(
-          actions: const [
-            Icon(Icons.chat_bubble_outline),
-            SizedBox(
-              width: 10,
-            ),
-          ],
           iconTheme: const IconThemeData(color: Colors.black),
           elevation: 0,
           backgroundColor: Colors.white,
@@ -44,27 +37,6 @@ class _LimitsScreenState extends State<LimitsScreen> {
               ),
               Tab(text: 'View remaining'),
             ],
-          ),
-        ),
-        bottomNavigationBar: Container(
-          height: 70,
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    'Back',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
         body: TabBarView(
@@ -155,157 +127,30 @@ class _LimitsScreenState extends State<LimitsScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: const [
-                        Text(
-                          'Below are you remaining Banking App limits fir the day.',
-                        ),
-                      ],
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        'Below are you remaining Banking App limits fir the day.',
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: Text(
+                        'NOTE: Your remaining limits are refreshed daily at 07h00',
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: const [
-                        Text(
-                          'NOTE: Your remaining limits are refreshed daily at 07h00',
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Payments',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R350,000',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Transfers',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R500,000',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Pay and Clear',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R500,000',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Prepaid',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R1,000',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Send money',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R3,000',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Vouchers',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R1,000',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          children: const [
-                            Text(
-                              'Cardless cash withdrawal',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            Text(
-                              'R1,500',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    _textColumn('Payments', 'R350,000'),
+                    _textColumn('Transfer', 'R500,000'),
+                    _textColumn('Pay and Clear', 'R500,000'),
+                    _textColumn('Prepaid', '1,000'),
+                    _textColumn('Send money', 'R3,000'),
+                    _textColumn('Vouchers', 'R1,000'),
+                    _textColumn('Cardless cash withdrawal', 'R,500'),
                   ],
                 ),
               ),
@@ -315,4 +160,23 @@ class _LimitsScreenState extends State<LimitsScreen> {
       ),
     );
   }
+}
+
+Widget _textColumn(String title, String amount) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 25.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(color: Colors.grey),
+        ),
+        Text(
+          amount,
+          style: const TextStyle(color: Colors.black),
+        ),
+      ],
+    ),
+  );
 }

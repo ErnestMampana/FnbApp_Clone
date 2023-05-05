@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:fnb_clone/screens/home_screen.dart';
 import 'package:fnb_clone/widgets/username_bullet.dart';
 
 class AppPinScreen extends StatelessWidget {
@@ -11,7 +8,7 @@ class AppPinScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         actions: const [
           Icon(Icons.search_rounded),
           SizedBox(
@@ -30,39 +27,6 @@ class AppPinScreen extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: false,
-      ),
-      bottomNavigationBar: Container(
-        height: 70,
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'Back',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                },
-                child: const Text(
-                  'update',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
       body: Column(
         children: [

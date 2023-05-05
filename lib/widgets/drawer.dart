@@ -127,12 +127,12 @@ class CustomDrawerState extends State<CustomDrawer> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const TransfersScreen()),
-              );
+              // Navigator.pop(context);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => const TransfersScreen()),
+              // );
             },
             child: const DrawerIcon(
               title: 'Transfers',

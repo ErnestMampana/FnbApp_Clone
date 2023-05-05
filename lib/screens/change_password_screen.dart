@@ -12,7 +12,6 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         actions: const [
           Icon(Icons.search_rounded),
           SizedBox(
@@ -31,39 +30,6 @@ class ChangePasswordScreen extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: false,
-      ),
-      bottomNavigationBar: Container(
-        height: 70,
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'Back',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
-                },
-                child: const Text(
-                  'update',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -85,24 +51,9 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
               const Text(
                   'You are required to enter a new password\nMake sure this banking password is completely unique and not for any of your app,email or website logins'),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Old:',
-                ),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'New:',
-                ),
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Confirm:',
-                ),
-              ),
+              _passwordText('Old:'),
+              _passwordText('New:'),
+              _passwordText('Confirm:'),
               const SizedBox(
                 height: 30,
               ),
@@ -159,4 +110,59 @@ class ChangePasswordScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _passwordText(String title) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 20.0),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8.0,left:20),
+          child: Text(
+            title,
+            textAlign: TextAlign.left,
+            style:const TextStyle(fontSize: 15),
+          ),
+        ),
+        Container(
+          width: 400,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+            border: Border.all(
+              color: Colors.grey,
+            ),
+          ),
+          child: SizedBox(
+            width: 250,
+            height: 25,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                // focusColor: Color.fromARGB(255, 20, 204, 201),
+                // fillColor: Color.fromARGB(255, 20, 204, 201),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
